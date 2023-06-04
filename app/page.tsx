@@ -1,91 +1,37 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+import { ProductResponse } from '@/types'
+import ItemGridList from './components/ItemGridList'
+import Pagination from './components/Pagination'
+import Title from './components/Title'
 
-const inter = Inter({ subsets: ['latin'] })
+interface Props {
+  searchParams: {
+    page: string
+  }
+}
 
-export default function Home() {
+const getProducts = async (page: number = 1): Promise<ProductResponse> => {
+  const limit = 10;
+  const skipCount = (page - 1) * 10;
+  const skip = page > 1 ? `&skip=${skipCount}` : '';
+  const res = await fetch(`https://dummyjson.com/products?limit=${limit}${skip}`);
+  const data = await res.json();
+  return data;
+}
+
+export default async function Home({ searchParams: { page } }: Props) {
+  const currentPage = Number.parseInt(page || '1');
+
+  const products = await getProducts(currentPage);
+
+  const totalPages = Math.ceil(products.total / products.limit);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+    <main className='flex flex-col justify-center items-center py-4 md:container mx-auto'>
+      <div className='flex-grow pb-4 w-full'>
+        <Title extraClasses='pb-4'>All products</Title>
+        <ItemGridList items={products.products} />
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      {totalPages > 1 && <Pagination totalPages={totalPages} currentPage={currentPage} path={`/`} />}
     </main>
   )
 }
