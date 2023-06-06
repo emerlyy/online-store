@@ -1,5 +1,6 @@
 'use client'
 
+import { useCategories } from "@/hooks/useCategories";
 import { useFetch } from "@/hooks/useFetch";
 import { useToggle } from "@/hooks/useToggle";
 import { formatKebabCase } from "@/utils/formatKebabCase";
@@ -9,7 +10,7 @@ import { BiCategory, BiX } from "react-icons/bi";
 
 const Categories = () => {
 
-    const { data: categories, status, error } = useFetch<string[]>('https://dummyjson.com/products/categories');
+    const [categories, status, error] = useCategories();
 
     const [isCategoriesActive, toggleIsCategoryActive] = useToggle(false);
 
@@ -36,6 +37,7 @@ const Categories = () => {
                                 ? <h2>Loading...</h2>
                                 : (
                                     <ul className='grid grid-cols-3 items-center justify-center'>
+                                        <li key='all' className='pl-6'><Link href={`/all-products`} onClick={() => toggleIsCategoryActive(false)}>All Products</Link></li>
                                         {categories?.map(category => <li key={category} className='pl-6'><Link href={`/${category}`} onClick={() => toggleIsCategoryActive(false)}>{formatKebabCase(category)}</Link></li>)}
                                     </ul>
                                 )
