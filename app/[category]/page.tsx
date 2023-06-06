@@ -41,9 +41,9 @@ const Category = async ({ params: { category }, searchParams: { page } }: Props)
     const totalPages = Math.ceil(products.total / products.limit);
 
     return (
-        <main className='flex flex-col justify-center items-center py-4 md:container mx-auto'>
+        <main className='flex flex-col justify-center items-center py-6 md:container mx-auto'>
             <div className='flex-grow pb-4 w-full'>
-                <Title extraClasses='pb-4'>{formatKebabCase(category)}</Title>
+                <Title extraClasses='pb-8'>{formatKebabCase(category)}</Title>
                 <ItemGridList items={products.products} />
             </div>
             {totalPages > 1 && <Pagination totalPages={totalPages} currentPage={currentPage} path={`/${category}`} />}
