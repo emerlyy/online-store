@@ -57,7 +57,7 @@ const Cart = () => {
                                             </li>
                                         ))}
                                     </ul>
-                                    <button className="bg-[--secondary-color] text-white px-3 py-2 rounded-sm">ORDER</button>
+                                    <Link href='/order' className="bg-[--secondary-color] text-white px-3 py-2 rounded-sm hover:opacity-80">Order</Link>
                                 </>)
                                 : <div>No items in cart</div>
                         }
