@@ -2,6 +2,7 @@ import { ProductResponse } from "@/types"
 import ItemGridList from "../components/ItemGridList"
 import Pagination from "../components/Pagination"
 import Title from "../components/Title"
+import { formatKebabCase } from "@/utils/formatKebabCase"
 
 
 interface Props {
@@ -18,8 +19,16 @@ const getProducts = async (page: number = 1, category: string): Promise<ProductR
     const limit = 10;
     const skipCount = (page - 1) * 10;
     const skip = page > 1 ? `&skip=${skipCount}` : '';
-    const res = await fetch(`https://dummyjson.com/products/category/${category}?limit=${limit}${skip}`);
+    const requestedCategory = category === 'all-products' ? '' : `/category/${category}`;
+
+    const res = await fetch(`https://dummyjson.com/products${requestedCategory}?limit=${limit}${skip}`, { cache: 'no-store' });
+
+    if (!res.ok) {
+        throw new Error('Failed to fetch data');
+    }
+
     const data = await res.json();
+
     return data;
 }
 
@@ -34,7 +43,7 @@ const Category = async ({ params: { category }, searchParams: { page } }: Props)
     return (
         <main className='flex flex-col justify-center items-center py-4 md:container mx-auto'>
             <div className='flex-grow pb-4 w-full'>
-                <Title extraClasses='pb-4'>{`${category[0].toUpperCase()}${category.slice(1)}`}</Title>
+                <Title extraClasses='pb-4'>{formatKebabCase(category)}</Title>
                 <ItemGridList items={products.products} />
             </div>
             {totalPages > 1 && <Pagination totalPages={totalPages} currentPage={currentPage} path={`/${category}`} />}
