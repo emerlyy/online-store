@@ -43,7 +43,7 @@ const Category = async ({ params: { category }, searchParams: { page } }: Props)
     return (
         <main className='flex flex-col justify-center items-center py-6 md:container mx-auto'>
             <div className='flex-grow pb-4 w-full'>
-                <Title extraClasses='pb-8'>{formatKebabCase(category)}</Title>
+                <Title size="2xl" extraClasses='pb-8'>{formatKebabCase(category)}</Title>
                 <ItemGridList items={products.products} />
             </div>
             {totalPages > 1 && <Pagination totalPages={totalPages} currentPage={currentPage} path={`/${category}`} />}
