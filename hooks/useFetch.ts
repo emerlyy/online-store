@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-type LoadingStatus = 'loading' | 'received' | 'rejected';
+export type LoadingStatus = 'loading' | 'received' | 'rejected';
 
-type FetchResponse<T> = {
+export type FetchResponse<T> = {
     data: null | T,
     status: LoadingStatus,
     error: null | Error,
