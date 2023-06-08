@@ -1,9 +1,8 @@
 import { ProductResponse } from "@/types"
+import { formatKebabCase } from "@/utils/formatKebabCase"
 import ItemGridList from "../components/ItemGridList"
 import Pagination from "../components/Pagination"
 import Title from "../components/Title"
-import { formatKebabCase } from "@/utils/formatKebabCase"
-
 
 interface Props {
     params: {
@@ -13,7 +12,6 @@ interface Props {
         page: string
     }
 }
-
 
 const getProducts = async (page: number = 1, category: string): Promise<ProductResponse> => {
     const limit = 10;
@@ -41,9 +39,9 @@ const Category = async ({ params: { category }, searchParams: { page } }: Props)
     const totalPages = Math.ceil(products.total / products.limit);
 
     return (
-        <main className='flex flex-col justify-center items-center py-6 md:container mx-auto'>
-            <div className='flex-grow pb-4 w-full'>
-                <Title size="2xl" extraClasses='pb-8'>{formatKebabCase(category)}</Title>
+        <main className='flex flex-col justify-center items-center sm:py-6 md:py-4 py-2 px-4 mx-auto'>
+            <div className='flex-grow pb-4 w-full max-w-[1300px]'>
+                <Title size="2xl" extraClasses='md:mb-8 sm:mb-6 mb-4 sm:pl-8'>{formatKebabCase(category)}</Title>
                 <ItemGridList items={products.products} />
             </div>
             {totalPages > 1 && <Pagination totalPages={totalPages} currentPage={currentPage} path={`/${category}`} />}

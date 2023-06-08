@@ -7,7 +7,7 @@ interface Props {
 
 const ItemGridList = ({ items }: Props) => {
     return (
-        <div className="grid grid-cols-[repeat(auto-fit,_250px)] auto-rows-fr items-center justify-center gap-x-2 gap-y-6">
+        <div className="grid sm:grid-cols-[repeat(auto-fit,_250px)] grid-cols-2 items-center justify-center gap-x-2 gap-y-6">
             {
                 items.map(item => <ItemCard key={item.id} item={item} />)
             }

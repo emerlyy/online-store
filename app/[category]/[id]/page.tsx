@@ -9,7 +9,6 @@ import { useQuantity } from "@/hooks/useQuantity";
 import { Product } from "@/types";
 import { FiShoppingCart } from "react-icons/fi";
 
-
 // const getProduct = async (id: string): Promise<Product> => {
 //     const res = await fetch(`https://dummyjson.com/products/${id}`);
 //     const data = await res.json();
@@ -42,14 +41,12 @@ const ProductPage = ({ params: { id } }: Props) => {
     if (!product) return <h1>Item not found</h1>
 
     return (
-        <div className="container grid grid-cols-[400px_1fr] gap-x-10 py-16 px-40">
-            {/* <div>
-                <Image width={1000} height={1000} src={product.images[0]} alt={product.title} />
-            </div> */}
+        <div className="max-w-[1000px] mx-auto grid md:grid-cols-[400px_1fr] gap-x-10 gap-y-5 lg:py-16 md:py-10 sm:py-6 py-4 px-4">
+           <h2 className="inline md:hidden text-3xl font-black text-[--secondary-color]">{product.title}</h2>
             <ImageViewer images={product.images}/>
             <div>
-                <h2 className="text-3xl font-black text-[--secondary-color]">{product.title}</h2>
-                <span className="block text-lg font-medium mb-2">{product.category}</span>
+                <h2 className="hidden md:inline text-3xl font-black text-[--secondary-color]">{product.title}</h2>
+                <span className="hidden md:block text-lg font-medium mb-2">{product.category}</span>
                 <div className="mb-2">{product.stock} Stocks Left</div>
                 <span className="block mb-4 font-medium text-2xl text-black">${product.price}</span>
                 <div className="flex items-center gap-x-4 mb-4">

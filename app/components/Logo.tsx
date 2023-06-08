@@ -10,9 +10,9 @@ interface Props {
 const Logo = ({ color = 'black' }: Props) => {
     const logoColor = color === 'secondary' ? '[--secondary-color]' : color;
     return (
-        <Link href='/' className={`text-${logoColor} flex items-center gap-x-3 text-2xl font-bold tracking-widest`}>
-            <FaShopify className="text-5xl" />
-            Emerly shop
+        <Link href='/' className={`text-${logoColor} flex items-center gap-x-3`}>
+            <FaShopify className="lg:text-5xl sm:text-4xl text-3xl" />
+            <span className="lg:text-2xl text-lg font-bold lg:tracking-widest tracking-wider sm:inline hidden">Emerly shop</span>
         </Link>
     )
 }

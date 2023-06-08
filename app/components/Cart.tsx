@@ -35,7 +35,7 @@ const Cart = () => {
     return (
         <div ref={cartRef} id='cart' className="relative flex items-center justify-center">
             <button onClick={toggleCartOpen}>
-                <FiShoppingCart className='text-white text-3xl' />
+                <FiShoppingCart className='text-white lg:text-3xl text-2xl' />
             </button>
             {itemsCount > 0 && <div className="absolute right-0 bottom-0 translate-x-3/4 translate-y-1/4 bg-red-500 rounded-full w-4 h-4 grid place-items-center text-xs text-white transition-all">{itemsCount}</div>}
             {

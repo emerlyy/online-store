@@ -4,8 +4,8 @@ import Logo from './Logo';
 
 const Header = () => {
     return (
-        <header className='px-12 bg-black z-50'>
-            <div className='relative h-[4.5rem] flex items-center'>
+        <header className='lg:px-12 md:px-8 sm:px-6 px-4 bg-black z-50'>
+            <div className='relative md:h-[4.5rem] h-[3rem] flex items-center'>
                 <div className='flex-grow flex gap-x-6'>
                     <Logo color='white' />
                     <Categories />

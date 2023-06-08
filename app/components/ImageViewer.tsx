@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import { useState } from 'react'
+
 interface Props {
     images: string[]
 }
@@ -16,7 +17,7 @@ const ImageViewer = ({ images }: Props) => {
             <div className="h-[340px] mb-3">
                 <Image src={current} alt='' width={1000} height={1000} className="w-full h-full object-contain"/>
             </div>
-            <ul className="flex items-center gap-x-4">
+            <ul className="flex items-center mx-auto w-fit gap-x-4 flex-wrap">
                 {
                     images.map(img => {
                         const isActive = img === current;

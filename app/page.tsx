@@ -39,21 +39,22 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <main className='flex mx-auto max-w-5xl py-8 gap-x-6'>
-      <div className='w-[600px] h-[500px]'>
-        <Image src='/home-image.png' alt='' width={2000} height={2000} className='w-full h-full object-contain' />
+    <section className='flex sm:flex-row flex-col mx-auto max-w-5xl h-[calc(100vh_-_80px)] lg:px-0 md:px-4 px-2 md:py-8 sm:py-6 py-4 gap-6 items-center justify-center'>
+      <div className='lg:w-[600px] sm:w-[400px] w-full sm:h-auto h-[50vh]'>
+        <Image src='/home-image.png' alt='' width={600} height={600} className='w-full h-full object-contain' />
       </div>
-      <div className='flex flex-col justify-center'>
-        <h1 className='font-black text-[3rem] text-[--secondary-color]'>Emerly Shop</h1>
-        <p className='font-medium text-2xl text-black mb-6'>A walk-in-a-park online shopping experience!</p>
+      <div className='flex flex-col justify-center sm:items-start items-center sm:text-start text-center'>
+        <h1 className='font-black lg:text-[3rem] md:text-[2.5rem] text-[2rem] text-[--secondary-color]'>Emerly Shop</h1>
+        <p className='font-medium lg:text-2xl md:text-xl sm:text-lg text-base text-black mb-6'>A walk-in-a-park online shopping experience!</p>
         <Link
           href='/all-products'
-          className='w-fit px-5 py-3 font-bold text-base 
-          text-[--primary-color] bg-[--secondary-color] 
-          rounded-full hover:opacity-80'>
+          className='w-fit px-5 py-3 font-bold 
+          sm:text-base text-sm text-[--primary-color] 
+          bg-[--secondary-color] rounded-full hover:opacity-80'
+          >
           Shop Now!
         </Link>
       </div>
-    </main>
+    </section>
   )
 }
