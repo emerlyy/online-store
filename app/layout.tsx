@@ -1,5 +1,4 @@
 import CartProvider from '@/context/cartContext'
-import Footer from './components/Footer'
 import Header from './components/Header'
 import './globals.css'
 
@@ -21,7 +20,7 @@ export default function RootLayout({
           <main className='flex-grow'>
             {children}
           </main>
-          <Footer />
+          {/* <Footer /> */}
         </body>
       </CartProvider>
     </html>
